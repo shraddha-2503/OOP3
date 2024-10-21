@@ -1,0 +1,136 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+class Publication 
+{
+    protected:
+    string title;
+    float price;
+    public:
+    void set_zero(void) 
+    {
+       title="000";
+       price = 0.0;
+    }
+    
+    void getdata(void)
+    {
+      cout<<"\n\t Enter the Name :";
+      cin>>title;
+      cout<<"\n\t Enter the price :";
+      cin>>price;
+    }
+    
+    void putdata(void)
+    {
+      cout<<"\n\t Name:"<<title;
+      cout<<"\n\t Price:"<<price;
+    }
+};
+
+class Book : public Publication
+{
+   int page_count;
+   public:
+   void set_zero(void) 
+   {
+     page_count=0;
+     Publication::set_zero();
+   }
+   
+   void getdata(void)
+   {
+     Publication::getdata();
+     cout<<"\t Enter the number of pages: ";  
+     cin>>page_count;
+     try
+      {
+        
+        if(price<0)
+         throw (0);  
+         throw (0.0); 
+      
+      }
+       catch(double x)
+       {
+         cout<<"\n\t Exception--Price cannot hold a negative value:";
+         cout<<"\n\t Turning all values to zero:";
+          set_zero();
+       }
+       catch(int x)
+        {
+         cout<<"\n\t Exception--Price cannot hold a negative value:";
+         cout<<"\n\t Turning all values to zero:";
+          set_zero();
+       }
+       
+   }
+   
+   void putdata(void)
+   {
+     Publication::putdata();
+     cout<<"\t Number of pages:"<<page_count;
+     cout<<endl<<endl;
+    }
+  };
+  
+  
+class Tape : public Publication
+{
+  float playing_time;
+  public:
+   void set_zero(void)
+   {
+     playing_time=0.0;
+     Publication::set_zero();
+   }
+   
+   void getdata(void)
+   {
+    Publication::getdata();
+    cout<<"\t Enter the playing time: ";  
+     cin>>playing_time;
+     try
+      {
+      
+        if (price<0)
+         throw 0;
+         
+        if (playing_time<0)
+         throw(0.0);
+      }
+      catch(int x)
+      {
+        cout<<"\n\t Exception-- Price cannot be a negetive value:";
+	cout<<"\n\t Turning all values to zero.";
+         set_zero();
+      } 
+      catch(double x)
+      {
+        cout<<"\n\t Exception-- Playing time cannot be a negetive value:";
+	cout<<"\n\t Turning all values to zero.";
+         set_zero();
+      }
+    }
+
+   void putdata(void)
+   {
+     Publication::putdata();
+     cout<<"\t Playing time: "<<playing_time; 
+     cout<<endl<<endl;
+   }
+};
+
+int main()
+{
+ Tape T;
+ Book B;
+ cout<<"\n\t Enter data of Tape :\n";
+ T.getdata(); 
+ T.putdata();
+ cout<<"\n\t Enter data of Book :\n";
+ B.getdata(); 
+ B.putdata();
+ return 0;
+}
+       
